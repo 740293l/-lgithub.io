@@ -3,145 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的家乡——西安</title>
+    <title>海绵宝宝 | 个人主页</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
         }
+
         body {
-            min-width: 1200px;
-            max-width: 1400px;
+            background: linear-gradient(180deg, #40c4ff 0%, #0288d1 100%);
+            color: #222;
+            overflow-x: hidden;
+        }
+
+        /* 海底气泡动画 */
+        .bubble {
+            position: fixed;
+            bottom: -100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            animation: rise linear infinite;
+            z-index: 0;
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(-100vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
             margin: 0 auto;
-            background: linear-gradient(90deg, #d6ee9e, #fff9e6);
-            font-family: "Microsoft YaHei", SimSun, serif;
-        }
-        /* 顶部标题栏 */
-        .top-bar {
-            background-color: #e2efb8;
-            padding: 16px 30px;
-            font-size: 16px;
-            color: #222;
-        }
-        /* 顶部横幅大图 西安城墙 */
-        .banner-img {
-            width: 100%;
-            height: 420px;
-            display: block;
-            object-fit: cover;
-        }
-        /* 板块标题统一样式 */
-        .section-title {
-            background: linear-gradient(90deg, #e6b86c, #f2b0a0);
-            margin: 30px 20px 20px;
-            padding: 12px;
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            border-radius: 8px;
-        }
-        /* 我的家乡 图文左右布局 */
-        .about-wrap {
-            display: flex;
-            gap: 25px;
-            padding: 0 30px;
-            align-items: flex-start;
-        }
-        .about-img {
-            width: 360px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        .about-text {
-            flex: 1;
-            font-size: 15px;
-            line-height: 1.7;
-            color: #222;
-        }
-        /* 三图一行（景点、传统文化） */
-        .three-row {
-            display: flex;
-            gap: 15px;
-            padding: 0 30px;
-        }
-        .three-row img {
-            width: calc((100% - 30px) / 3);
-            height: 320px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        /* 美食四图横向排列 */
-        .food-row {
-            display: flex;
-            gap: 12px;
-            padding: 0 30px;
-        }
-        .food-row img {
-            width: calc((100% - 36px) / 4);
-            height: 280px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        /* 底部黑色页脚 */
-        footer {
-            background-color: #121212;
-            color: #dddddd;
-            text-align: center;
             padding: 20px;
-            font-size: 14px;
-            margin-top: 40px;
+        }
+
+        /* 头部横幅 */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .sponge-title {
+            font-size: 48px;
+            color: #fff600;
+            text-shadow: 4px 4px 0 #ff9800, 6px 6px 0 #f57f17;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+        .sub-title {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* 人物卡片 */
+        .about-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        .avatar-box {
+            width: 260px;
+            height: 260px;
+            background: #fff600;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 6px solid #ff9800;
+            flex-shrink: 0;
+        }
+        .avatar-box img {
+            width: 220px;
+        }
+        .info h2 {
+            font-size: 32px;
+            color: #ffb300;
+            margin-bottom: 15px;
+        }
+        .info p {
+            font-size: 17px;
+            line-height: 1.8;
+            margin: 8px 0;
+        }
+        .tag {
+            display: inline-block;
+            background: #40c4ff;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin: 5px 4px;
+            font-weight: bold;
+        }
+
+        /* 好友板块 */
+        .friend-section {
+            margin: 50px 0;
+        }
+        .section-head {
+            text-align: center;
+            font-size: 34px;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px #01579b;
+        }
+        .friend-wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .friend-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s transform;
+        }
+        .friend-card:hover {
+            transform: translateY(-10px);
+        }
+        .friend-card h3 {
+            margin: 12px 0;
+            color: #0288d1;
+        }
+        /* 好友头像样式 */
+        .friend-card .char-img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        /* 语录板块 */
+        .quote-box {
+            background: #fff600;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        .quote-text {
+            font-size: 24px;
+            font-style: italic;
+            color: #333;
+            line-height: 1.9;
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 16px;
+        }
+
+        /* 移动端适配 */
+        @media(max-width:768px){
+            .about-card {
+                justify-content: center;
+                text-align: center;
+            }
+            .sponge-title {
+                font-size: 32px;
+            }
+            .avatar-box {
+                width: 200px;
+                height: 200px;
+            }
+            .avatar-box img {
+                width: 160px;
+            }
+            .friend-card .char-img {
+                width: 130px;
+                height: 130px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部标题栏 -->
-    <div class="top-bar">
-        我的家乡
-    </div>
+    <!-- 气泡容器 -->
+    <div id="bubbleWrap"></div>
 
-    <!-- 首屏大图：西安城墙护城河 -->
-    <img class="banner-img" src="https://img0.baidu.com/it/u=1249033131,3079292329&fm=253&fmt=auto&app=138&f=JPEG?w=1920&h=800" alt="西安城墙全景">
+    <div class="container">
+        <header>
+            <h1 class="sponge-title">海绵宝宝</h1>
+            <p class="sub-title">比奇堡开心小方块 · 蟹堡王金牌厨师</p>
+        </header>
 
-    <!-- 我的家乡板块 -->
-    <div class="section-title">我的家乡</div>
-    <div class="about-wrap">
-        <img class="about-img" src="https://img2.baidu.com/it/u=3299743121,3842010312&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=600" alt="西安古典园林">
-        <div class="about-text">
-            西安古称长安，坐拥三千余年建城史、千余年建都史，是十三朝古都，丝绸之路起点。远古蓝田猿人、半坡遗址见证华夏文明；西周丰镐开创礼乐文明，汉长安开辟丝路，连通欧亚。隋大兴城奠定规整城址，盛唐长安规模宏大，万国来朝，商贸文化交融，是世界级大都会。唐宋后都城地位不复存在。明代定名西安，修筑古城墙。近代西安事变推动抗日统一战线形成。如今西安留存兵马俑、大雁塔、明城墙等众多古迹，承载周秦汉唐盛世文脉，是承载中华千年历史的文化名城。
+        <!-- 个人介绍 -->
+        <div class="about-card">
+            <div class="avatar-box">
+                <img src="./img/baby1.jpeg" alt="海绵宝宝">
+            </div>
+            <div class="info">
+                <h2>哈喽！我是海绵宝宝·方裤块</h2>
+                <p>📍 居住地：太平洋海底 · 比奇堡 菠萝屋</p>
+                <p>🍔 工作：蟹堡王餐厅厨师，全世界最会做蟹黄堡的人</p>
+                <p>🐿️ 最好朋友：派大星、珊迪</p>
+                <p>🎯 爱好：吹泡泡、抓水母、练空手道、挖蛤蜊、吹竖笛</p>
+                <div>
+                    <span class="tag">乐观开朗</span>
+                    <span class="tag">勤劳能干</span>
+                    <span class="tag">永远开心</span>
+                    <span class="tag">热爱生活</span>
+                </div>
+                <p style="margin-top:12px;">无论遇到什么烦恼，都要像我一样永远充满活力！</p>
+            </div>
         </div>
+
+        <!-- 好朋友板块（图片放在名字下方） -->
+        <section class="friend-section">
+            <h2 class="section-head">我的比奇堡好朋友</h2>
+            <div class="friend-wrap">
+                <!-- 派大星 -->
+                <div class="friend-card">
+                    <h3>派大星</h3>
+                    <p>我最好的海星兄弟</p>
+                    <img class="char-img" src="./img/baby2.jpeg" alt="派大星">
+                </div>
+                <!-- 珊迪 -->
+                <div class="friend-card">
+                    <h3>珊迪</h3>
+                    <p>德克萨斯松鼠，空手道搭子</p>
+                    <img class="char-img" src="./img/baby3.jpeg" alt="珊迪">
+                </div>
+                <!-- 章鱼哥 -->
+                <div class="friend-card">
+                    <h3>章鱼哥</h3>
+                    <p>爱吹竖笛的邻居（嘴上嫌弃我）</p>
+                    <img class="char-img" src="./img/baby4.jpeg" alt="章鱼哥">
+                </div>
+                <!-- 蟹老板 -->
+                <div class="friend-card">
+                    <h3>蟹老板</h3>
+                    <p>我的老板，超爱钱</p>
+                    <img class="char-img" src="./img/baby5.jpeg" alt="蟹老板">
+                </div>
+            </div>
+        </section>
+
+        <!-- 经典语录 -->
+        <div class="quote-box">
+            <p class="quote-text">
+                “知识不能替代友谊，就算失去一切，我也要留住派大星！”
+            </p>
+        </div>
+
+        <footer>
+            <p>© 2026 海绵宝宝个人官网 | 比奇堡菠萝屋出品</p>
+        </footer>
     </div>
 
-    <!-- 景点推荐 3张图：大雁塔、钟楼、兵马俑 -->
-    <div class="section-title">景点推荐</div>
-    <div class="three-row">
-        <img src="https://img0.baidu.com/it/u=1996636840,293302324&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=600" alt="大雁塔">
-        <img src="https://img2.baidu.com/it/u=2048610922,383220312&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=600" alt="西安钟楼">
-        <img src="https://img2.baidu.com/it/u=133323400,198320412&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=600" alt="秦始皇兵马俑">
-    </div>
+    <script>
+        // 生成上浮气泡
+        const bubbleWrap = document.getElementById('bubbleWrap');
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            // 随机大小、位置、速度
+            const size = Math.random() * 40 + 10;
+            bubble.style.width = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left = Math.random() * 100 + '%';
+            const duration = Math.random() * 8 + 6;
+            bubble.style.animationDuration = duration + 's';
+            bubbleWrap.appendChild(bubble);
+            // 气泡走完删除
+            setTimeout(() => {
+                bubble.remove();
+            }, duration * 1000);
+        }
+        // 持续生成气泡
+        setInterval(createBubble, 400);
 
-    <!-- 特色美食 4张图：烤串、凉皮、葫芦鸡、油糕 -->
-    <div class="section-title">特色美食</div>
-    <div class="food-row">
-        <img src="https://img1.baidu.com/it/u=1292403422,3799410211&fm=253&fmt=auto&app=138&f=JPEG?w=600&h=500" alt="西安烤串">
-        <img src="https://img2.baidu.com/it/u=3832401131,2789211044&fm=253&fmt=auto&app=120&f=JPEG?w=600&h=500" alt="陕西凉皮">
-        <img src="https://img2.baidu.com/it/u=1097439230,393221023&fm=253&fmt=auto&app=138&f=JPEG?w=600&h=500" alt="葫芦鸡">
-        <img src="https://img2.baidu.com/it/u=3344322244,3201003341&fm=253&fmt=auto&app=120&f=JPEG?w=600&h=500" alt="油糕">
-    </div>
-
-    <!-- 传统文化 3张图：剪纸、竹编、皮影 -->
-    <div class="section-title">传统文化</div>
-    <div class="three-row">
-        <img src="https://img2.baidu.com/it/u=3782210333,1320041210&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=600" alt="陕西剪纸">
-        <img src="https://img2.baidu.com/it/u=2234230130,3911200343&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=600" alt="传统竹编工艺">
-        <img src="https://img2.baidu.com/it/u=3922011340,2334110242&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=600" alt="华县皮影戏">
-    </div>
-
-    <!-- 底部页脚 -->
-    <footer>
-        传统文化，个人网页
-    </footer>
+        // 自动切换语录
+        const quotes = [
+            "知识不能替代友谊，就算失去一切，我也要留住派大星！",
+            "今天也要开心地去抓水母！",
+            "蟹黄堡是全世界最美味的食物！",
+            "准备好迎接今天的快乐了吗？",
+            "难过的时候就吹个大大的泡泡吧！"
+        ];
+        let quoteIndex = 0;
+        const quoteDom = document.querySelector('.quote-text');
+        setInterval(() => {
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+            quoteDom.textContent = `"${quotes[quoteIndex]}"`;
+        }, 5000);
+    </script>
 </body>
 </html>
